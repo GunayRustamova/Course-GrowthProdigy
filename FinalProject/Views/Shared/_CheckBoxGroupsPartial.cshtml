@@ -1,0 +1,12 @@
+﻿@model List<Group>
+<div class="form-group">
+    <label>Qrup(lar) Seç</label>
+    <div class="form-control" style="height:auto" name="groupId" id="group">
+        @foreach (Group group in Model)
+        {
+            <div >
+                <input type="checkbox" value="@group.Id" /> @group.GroupNumber
+            </div>
+        }
+    </div>
+</div>

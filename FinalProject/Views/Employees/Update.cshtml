@@ -1,0 +1,153 @@
+﻿@model Employee
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">İşçi Məlumatlarında Düzəliş Et</h4>
+
+                <form class="forms-sample" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="@Model.Photo">Şəkil</label>
+                        <input accept="image/*" type="file" name="Photo" class="form-control">
+                        <span asp-validation-for="@Model.Photo" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Name">Ad</label>
+                        <input asp-for="@Model.Name" class="form-control">
+                        <span asp-validation-for="@Model.Name" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Surname">Soyad</label>
+                        <input asp-for="@Model.Surname" class="form-control">
+                        <span asp-validation-for="@Model.Surname" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.FatherName">Atasının Adı</label>
+                        <input asp-for="@Model.FatherName" class="form-control">
+                        <span asp-validation-for="@Model.FatherName" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.EmployeeDetail.Address">Ünvanı</label>
+                        <input asp-for="@Model.EmployeeDetail.Address" class="form-control">
+                        <span asp-validation-for="@Model.EmployeeDetail.Address" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label>Cinsiyyət</label> <br><hr>
+                        @Html.RadioButtonFor(model => model.EmployeeDetail.Gender, true)
+                        <label>Female</label>
+                        @Html.RadioButtonFor(model => model.EmployeeDetail.Gender, false)
+                        <label>Male</label>
+                    </div>
+                    <div class="form-group">
+                        <label>Vəzifə Seç</label>
+                        <select asp-for="@Model.PositionId" class="form-control" name="positionId">
+                            @foreach (Position position in ViewBag.Positions)
+                            {
+                                if (position.Id == Model.PositionId)
+                                {
+                                    <option selected value="@position.Id">@position.Name</option>
+
+                                }
+                                else
+                                {
+                                    <option value="@position.Id">@position.Name</option>
+
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="@Model.PositionId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Kurs Seç</label>
+                        <select asp-for="@Model.CourseId" class="form-control" name="courseId" id="course">
+                            @foreach (Course course in ViewBag.Courses)
+                            {
+                                if (course.Id == Model.CourseId)
+                                {
+                                    <option selected value="@course.Id">@course.Name</option>
+
+                                }
+                                else
+                                {
+                                    <option value="@course.Id">@course.Name</option>
+
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="@Model.CourseId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Kurs Kateqoriyasını Seç</label>
+                        <select asp-for="@Model.CategoryId" class="form-control" name="categoryId" id="category">
+                            @foreach (Category category in Model.Course.Categories)
+                            {
+                                if (category.Id == Model.CategoryId)
+                                {
+                                    <option selected value="@category.Id">@category.Name</option>
+
+                                }
+                                else
+                                {
+                                    <option value="@category.Id">@category.Name</option>
+
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="@Model.CategoryId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.EmployeeDetail.Phone">Əlaqə Nömrəsi</label>
+                        <input asp-for="@Model.EmployeeDetail.Phone" class="form-control">
+                        <span asp-validation-for="@Model.EmployeeDetail.Phone" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.EmployeeDetail.Email">E-mail Ünvanı</label>
+                        <input asp-for="@Model.EmployeeDetail.Email" class="form-control">
+                        <span asp-validation-for="@Model.EmployeeDetail.Email" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.EmployeeDetail.Salary">Maaş</label>
+                        <input asp-for="@Model.EmployeeDetail.Salary" class="form-control">
+                        <span asp-validation-for="@Model.EmployeeDetail.Salary" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.EmployeeDetail.DateOfBirth">Doğum Tarixi</label>
+                        <input asp-for="@Model.EmployeeDetail.DateOfBirth" class="form-control">
+                        <span asp-validation-for="@Model.EmployeeDetail.DateOfBirth" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.EmployeeDetail.StartTime">İşə Başlama Müddəti</label>
+                        <input asp-for="@Model.EmployeeDetail.StartTime" class="form-control">
+                        <span asp-validation-for="@Model.EmployeeDetail.StartTime" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.EmployeeDetail.ExperienceYear">İş Təcrübəsi Müddəti</label>
+                        <input asp-for="@Model.EmployeeDetail.ExperienceYear" class="form-control">
+                        <span asp-validation-for="@Model.EmployeeDetail.ExperienceYear" class="text-danger">  </span>
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Yadda Saxla</button>
+                    <a asp-action="Index" class="btn btn-light">Ləğv Et</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+    {
+    <script>
+        $(document).on("change", "#course", function () {
+            $.ajax({
+                url: "/Employees/LoadCategories/",
+                type: "get",
+                data: {
+                    "courseId": $("#course").val()
+                },
+                success: function (response) {
+                    $("#category").empty()
+                    $("#category").append(response)
+                }
+            })
+        });
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+}

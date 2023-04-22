@@ -1,0 +1,19 @@
+﻿@model Lesson
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">@Model.Course.Name (@Model.Category.Name) @Model.Group.GroupNumber qrupunun "@Model.Title" dərsini ləğv etmək istəyirsiniz?</h4>
+                <form class="forms-sample" method="post" enctype="multipart/form-data">
+
+                    <button type="submit" class="btn btn-danger mr-2">Bəli</button>
+                    <a asp-action="Index" class="btn btn-light">Geri Qayıt</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+    {
+        <partial name="_ValidationScriptsPartial" />
+}

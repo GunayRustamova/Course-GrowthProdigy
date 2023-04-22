@@ -1,0 +1,46 @@
+﻿@model Course
+<h5 class="card-title" style="text-align:center; font-size:30px; font-weight:400; ">Kurs Haqqında Məlumat</h5>
+
+<div class="card mb-3" style="max-width: 1400px; margin:auto; height:800px;">
+    <div class="row g-0">
+        <div style="background-color:#C5CAE9; width:700px; height:800px; border-top-left-radius:20px; border-bottom-left-radius:20px;">
+            <img src="~/images/@Model.Image" class="img-fluid rounded-start" alt="@Model.Name-nin şəkili" style="border-radius:10px; min-height:635px; min-width:100%; margin:80px;">
+        </div>
+        <div class="col-md-6" style="display:flex;">
+            <div class="card-body">
+                <div>
+                    <h1 style="margin-top:70px; text-align:center; font-size:55px; ">@Model.Name Kursu</h1>
+
+                    <div class="col-lg-6" style="margin-left:50px; display:flex;">
+                        <ul style="list-style-type:none; margin-top:20px; font-size:18px;">
+                            <li>
+                                <strong>Kurs məlumatları</strong><hr>
+                            </li>
+                            <li>
+                                <i class="bi bi-chevron-right"></i>
+                                <strong>Haqqında:</strong>
+                                <span>@Model.CourseDetail.Description</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-chevron-right"></i>
+                                <strong>Ödəniş məbləği:</strong>
+                                <span>@Model.CourseDetail.Amount</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-chevron-right"></i>
+                                <strong>Kurs müddəti:</strong>
+                                <span>@Model.CourseDetail.CourseDuration</span>
+                            </li>
+                           
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

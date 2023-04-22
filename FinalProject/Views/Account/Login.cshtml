@@ -1,0 +1,113 @@
+﻿@model LoginVM
+@{
+    Layout = null;
+}
+<link href="https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+    * {
+        font-family: Andika;
+    }
+</style>
+<style>
+    body {
+        background-color: bisque !important;
+    }
+
+</style>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Skydash Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/vendors/feather/feather.css">
+    <link rel="stylesheet" href="~/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="~/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="~/css/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="~/images/mg_logo-removebg-preview.png" />
+</head>
+
+<body>
+
+    <div>
+        <ul style="display:flex; list-style-type:none; margin-top:100px;box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; border-radius:40px; width:1600px; margin-left:150px;">
+            <li style=" margin-right:-20px;">
+                <div class="card-body">
+                    <img src="~/images/3D Illustrations Projects.png" style="border-top-left-radius:20px; border-bottom-left-radius:20px;" />
+                </div>
+            </li>
+            <li style="background-color:#ffffff; height:750px; margin-top:20px; border-top-right-radius:20px; border-bottom-right-radius:20px;">
+                <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                    <div>
+                        <img src="~/images/my_logo.svg" alt="logo" style="width:350px; margin-bottom:20px; margin-top:50px;">
+                    </div>
+                    <h4>Salam! Xoş Gəlmisiniz! </h4>
+                    <h6 class="font-weight-light">Dəvam etmək üçün hesabınıza daxil olun.</h6>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="card-body">
+                        <form method="post">
+                            <div>
+                                <label asp-for="@Model.Username" class="form-label">İstifadəçi adı</label>
+                                <div class="shadow-danger input-group input-group-outline my-0">
+                                    <label class="form-label"></label>
+                                    <input asp-for="@Model.Username" class="form-control" style="width:400px;">
+
+                                </div>
+                                <span asp-validation-for="Username" class="text-danger"></span>
+                            </div><br />
+                            <div>
+                                <label asp-for="@Model.Password" class="form-label">Şifrə</label>
+                                <div class="shadow-danger input-group input-group-outline my-0">
+                                    <label class="form-label"></label>
+                                    <input asp-for="@Model.Password" class="form-control" style="width:400px;">
+
+                                </div>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div><br /><br />
+                            @*
+                            <div class="mt-3 form-check form-switch d-flex align-items-center mb-3">
+                            <input class="shadow-info form-check-input" type="checkbox" id="rememberMe" checked>
+                            <label class="form-check-label mb-0 ms-3" for="rememberMe">Məni xatırla</label>
+                            </div>*@
+                            <div class="text-center">
+                                <button class="login-button" type="submit" style="background-color:#FFB7BC; width:400px; height:40px; border-radius:20px; border:none;">Daxil olun</button>
+                            </div>
+
+                            <p class="mt-4 text-sm text-center">
+
+                                <a asp-action="Login" class="mt-4 text-sm text-center text-primary text-gradient font-weight-bold">Şifrəni unutmusan?</a>
+                            </p>
+
+                        </form>
+                    </div>
+
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="~/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="~/js/off-canvas.js"></script>
+    <script src="~/js/hoverable-collapse.js"></script>
+    <script src="~/js/template.js"></script>
+    <script src="~/js/settings.js"></script>
+    <script src="~/js/todolist.js"></script>
+    <!-- endinject -->
+</body>
+
+</html>

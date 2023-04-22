@@ -1,0 +1,129 @@
+﻿@model Employee
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Update Employee</h4>
+
+                <form class="forms-sample" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="@Model.Photo"></label>
+                        <input accept="image/*" type="file" name="Photo" class="form-control">
+                        <span asp-validation-for="@Model.Photo" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Name"></label>
+                        <input asp-for="@Model.Name" class="form-control">
+                        <span asp-validation-for="@Model.Name" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Surname"></label>
+                        <input asp-for="@Model.Surname" class="form-control">
+                        <span asp-validation-for="@Model.Surname" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.FatherName"></label>
+                        <input asp-for="@Model.FatherName" class="form-control">
+                        <span asp-validation-for="@Model.FatherName" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.EmployeeDetail.Address"></label>
+                        <input asp-for="@Model.EmployeeDetail.Address" class="form-control">
+                        <span asp-validation-for="@Model.EmployeeDetail.Address" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        @Html.RadioButtonFor(model => model.EmployeeDetail.Gender, true)
+                        <label>Female</label>
+                        @Html.RadioButtonFor(model => model.EmployeeDetail.Gender, false)
+                        <label>Male</label>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Position</label>
+                        <select asp-for="@Model.PositionId" class="form-control" name="positionId">
+                            @foreach (Position position in ViewBag.Positions)
+                            {
+                                if (position.Id == Model.PositionId)
+                                {
+                                    <option selected value="@position.Id">@position.Name</option>
+
+                                }
+                                else
+                                {
+                                    <option value="@position.Id">@position.Name</option>
+
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="@Model.PositionId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Course</label>
+                        <select asp-for="@Model.CourseId" class="form-control" name="courseId">
+                            @foreach (Course course in ViewBag.Courses)
+                            {
+                                if (course.Id == Model.CourseId)
+                                {
+                                    <option selected value="@course.Id">@course.Name</option>
+
+                                }
+                                else
+                                {
+                                    <option value="@course.Id">@course.Name</option>
+
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="@Model.CourseId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Select Category</label>
+                        <select asp-for="@Model.CategoryId" class="form-control" name="categoryId">
+                            @foreach (Category category in ViewBag.Categories)
+                            {
+                                if (category.Id == Model.CategoryId)
+                                {
+                                    <option selected value="@category.Id">@category.Name</option>
+
+                                }
+                                else
+                                {
+                                    <option value="@category.Id">@category.Name</option>
+
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="@Model.CategoryId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.EmployeeDetail.Phone"></label>
+                        <input asp-for="@Model.EmployeeDetail.Phone" class="form-control">
+                        <span asp-validation-for="@Model.EmployeeDetail.Phone" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.EmployeeDetail.Email"></label>
+                        <input asp-for="@Model.EmployeeDetail.Email" class="form-control">
+                        <span asp-validation-for="@Model.EmployeeDetail.Email" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.EmployeeDetail"></label>
+                        <input asp-for="@Model.EmployeeDetail.Salary" class="form-control">
+                        <span asp-validation-for="@Model.EmployeeDetail.Salary" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.EmployeeDetail.DateOfBirth"></label>
+                        <input asp-for="@Model.EmployeeDetail.DateOfBirth" class="form-control">
+                        <span asp-validation-for="@Model.EmployeeDetail.DateOfBirth" class="text-danger">  </span>
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <a asp-action="Index" class="btn btn-light">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

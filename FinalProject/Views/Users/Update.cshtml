@@ -1,0 +1,68 @@
+﻿@model UpdateVM
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">İstifadəçidə Dəyişiklik Et</h4>
+
+                <form class="forms-sample" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="@Model.Photo">Şəkil</label>
+                        <input accept="image/*" type="file" asp-for="@Model.Photo" class="form-control">
+                        <span asp-validation-for="@Model.Photo" class="text-danger">  </span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="@Model.Name">Ad</label>
+                        <input asp-for="@Model.Name" class="form-control">
+                        <span asp-validation-for="@Model.Name" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Surname">Soyad</label>
+                        <input asp-for="@Model.Surname" class="form-control">
+                        <span asp-validation-for="@Model.Surname" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Email">E-mail Ünvanı</label>
+                        <input asp-for="@Model.Email" class="form-control">
+                        <span asp-validation-for="@Model.Email" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Username">İstifadəçi Adı</label>
+                        <input asp-for="@Model.Username" class="form-control">
+                        <span asp-validation-for="@Model.Username" class="text-danger">  </span>
+                    </div>
+                     <div class="form-group">
+                        <label>Cinsiyyət</label> <br><hr>
+                        @Html.RadioButtonFor(model => model.Gender, true)
+                        <label>Qadın</label>
+                        @Html.RadioButtonFor(model => model.Gender, false)
+                        <label>Kişi</label>
+                    </div>
+                    <div class="form-group">
+                        <label>Rol Seç</label>
+                        <select class="form-control" name="newRole">
+                            @foreach (Microsoft.AspNetCore.Identity.IdentityRole role in ViewBag.Roles)
+                            {
+                                if (Model.Role == role.Name)
+                                {
+                                    <option selected value="@role.Name">@role.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@role.Name">@role.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Yadda Saxla</button>
+                    <a asp-action="Index" class="btn btn-light">Ləğv Et</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+}

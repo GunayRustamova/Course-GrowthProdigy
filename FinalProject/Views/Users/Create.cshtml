@@ -1,0 +1,72 @@
+﻿@model RegisterVM
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">İstifadəçi Əlavə Et</h4>
+
+                <form class="forms-sample" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="@Model.Photo">Şəkil</label>
+                        <input accept="image/*" asp-for="@Model.Photo" class="form-control">
+                        <span asp-validation-for="@Model.Photo" class="text-danger">  </span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="@Model.Name">Ad</label>
+                        <input asp-for="@Model.Name" class="form-control">
+                        <span asp-validation-for="@Model.Name" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Surname">Soyad</label>
+                        <input asp-for="@Model.Surname" class="form-control">
+                        <span asp-validation-for="@Model.Surname" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Email">E-mail Ünvanı</label>
+                        <input asp-for="@Model.Email" class="form-control">
+                        <span asp-validation-for="@Model.Email" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Username">İstifadəçi Adı</label>
+                        <input asp-for="@Model.Username" class="form-control">
+                        <span asp-validation-for="@Model.Username" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label>Cinsiyyət</label> <br><hr >
+                        @Html.RadioButtonFor(model => model.Gender, true)
+                        <label>Qadın</label>
+                        @Html.RadioButtonFor(model => model.Gender, false)
+                        <label>Kişi</label>
+                    </div>
+                    <div class="form-group">
+                        <label>Rol Seç</label>
+                        <select  class="form-control" name="role">
+                            @foreach (Microsoft.AspNetCore.Identity.IdentityRole role in ViewBag.Roles)
+                            {
+                                <option value="@role.Name">@role.Name</option>
+                            }
+                        </select>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label asp-for="@Model.Password">Şifrə</label>
+                        <input asp-for="@Model.Password" class="form-control">
+                        <span asp-validation-for="@Model.Password" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.ConfirmPassword">Şifrəni Təsdiqlə</label>
+                        <input asp-for="@Model.ConfirmPassword" class="form-control">
+                        <span asp-validation-for="@Model.ConfirmPassword" class="text-danger">  </span>
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Yadda Saxla</button>
+                    <a asp-action="Index" class="btn btn-light">Ləğv Et</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+   
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,130 @@
+﻿@model Assignment
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tapşırıq Məlumatlarında Dəyişiklik Et</h4>
+                <form class="forms-sample" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="@Model.Name">Tapşırığın Adı</label>
+                        <input asp-for="@Model.Name" class="form-control">
+                        <span asp-validation-for="@Model.Name" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label>Kurs Seç</label>
+                        <select class="form-control" name="courseId" id="course">
+                            @foreach (Course course in ViewBag.Courses)
+                            {
+                                if (course.Id == Model.CourseAssignments.FirstOrDefault().CourseId)
+                                    {
+                                        <option selected value="@course.Id">@course.Name</option>
+
+                                    }
+                                    else
+                                    {
+                                        <option value="@course.Id">@course.Name</option>
+
+                                    }
+                                
+                            }
+                        </select>
+                        <span  class="text-danger"></span>
+                    </div>
+                    <div id="catGroup">
+                        <div class="form-group">
+                            <label>Kursun Kateqoriyasını Seç</label>
+                            <select class="form-control" name="categoryId" id="category">
+                                @foreach (Category category in Model.CourseAssignments.FirstOrDefault().Course.Categories )
+                                {
+                                    if (category.Id == Model.CategoryAssignments.FirstOrDefault().CategoryId)
+                                    {
+                                        <option selected value="@category.Id">@category.Name</option>
+
+                                    }
+                                    else
+                                    {
+                                        <option value="@category.Id">@category.Name</option>
+
+                                    }
+                                }
+                            </select>
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Qrup(lar) Seç</label><hr />
+                        <div id="group">
+                            
+                            @foreach (Group group in Model.CourseAssignments.FirstOrDefault().Course.Categories.FirstOrDefault(x => x.Id == Model.CategoryAssignments.FirstOrDefault().CategoryId).Groups)
+                            {
+                                if (Model.GroupAssignments.Any(x => x.GroupId == group.Id))
+                                {
+                                    <span style="margin-right:15px;">
+                                        <input type="checkbox" value="@group.Id" name="groupId" id="group" checked /> @group.GroupNumber
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span>
+                                        <input type="checkbox" value="@group.Id" name="groupId" id="group" /> @group.GroupNumber
+                                    </span>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.AddFile">Tapşırıq Faylını Əlavə Et</label>
+                        <input accept="application/pdf" type="file" name="AddFile" class="form-control">
+                        <span asp-validation-for="@Model.AddFile" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.StartTime">Başlama Müddəti</label>
+                        <input asp-for="@Model.StartTime" class="form-control">
+                        <span asp-validation-for="@Model.StartTime" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.EndTime">Bitmə Müddəti</label>
+                        <input asp-for="@Model.EndTime" class="form-control">
+                        <span asp-validation-for="@Model.EndTime" class="text-danger">  </span>
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Yadda Saxla</button>
+                    <a asp-action="Index" class="btn btn-light">Ləğv Et</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+    {
+    <script>
+        $(document).on("change", "#course", function () {
+            $.ajax({
+                url: "/Assignments/LoadCategories/",
+                type: "get",
+                data: {
+                    "courseId": $("#course").val()
+                },
+                success: function (response) {
+                    $("#catGroup").empty()
+                    $("#catGroup").append(response)
+                }
+            })
+
+        });
+        $(document).on("change", "#category", function () {
+            $.ajax({
+                url: "/Assignments/LoadGroups/",
+                type: "get",
+                data: {
+                    "categoryId": $("#category").val()
+                },
+                success: function (response) {
+                    $("#group").empty()
+                    $("#group").append(response)
+                }
+            })
+
+        });
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+}

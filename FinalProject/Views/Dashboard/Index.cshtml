@@ -1,0 +1,219 @@
+﻿@model Last30DaysVM
+<h2 style="margin-left:350px; margin-bottom:40px;">Son 30 Günün Statistikası</h2>
+<div>
+    <ul style="display:flex; list-style-type:none;">
+        <li style="margin-right:100px;">
+            <div onclick="show1()">
+                <div class="card">
+                    <div class="card-body " style=" width:290px; height:130px;">
+                        <div class="stat-widget-five">
+                            <ul style="display:flex; justify-content:space-between; list-style-type:none;">
+                                <li>
+                                    <div class="stat-icon dib flat-color-4" style="margin-top:20px; margin-right:20px;">
+                                        <i class="fa-solid fa-users"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="stat-content" style="margin-right:30px; margin-top:5px; margin-bottom:20px;">
+                                        <div class="text-left dib">
+                                            <div class="stat-text" style="font-size:20px; font-weight:700;"><span class="count">@Model.StudentCount</span></div>
+                                            <div class="stat-heading" style="font-size:18px; font-weight:400;">Yeni Tələbələr</div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <br /><br /><br />
+            </div>
+        </li>
+        <li style="margin-right:100px;">
+            <div  onclick="show2()">
+                <div class="card">
+                    <div class="card-body" style=" width:290px; height:130px;">
+                        <div class="stat-widget-five">
+                            <ul style="display:flex; justify-content:space-between; list-style-type:none;">
+                                <li>
+                                    <div class="stat-icon dib flat-color-4" style="margin-top:20px; margin-right:20px;">
+                                        <i class="fa-solid fa-money-check-dollar" style="margin-right:1rem;  font-size: 30px;  width: 40px;"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="stat-content" style="margin-right:50px; margin-top:5px; margin-bottom:20px;">
+                                        <div class="text-left dib">
+                                            <div class="stat-text" style="font-size:20px; font-weight:700;"><span class="count">@Model.TotalExpenditureAmount</span></div>
+                                            <div class="stat-heading" style="font-size:18px; font-weight:400;">Xərclər</div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <br /><br /><br />
+
+            </div>
+
+        </li>
+        <li>
+            <div  onclick="show3()">
+                <div class="card">
+                    <div class="card-body" style=" width:290px; height:130px;">
+                        <div class="stat-widget-five">
+                            <ul style="display:flex; justify-content:space-between; list-style-type:none;">
+                                <li>
+                                    <div class="stat-icon dib flat-color-4" style="margin-top:20px; margin-right:20px;">
+                                        <i class="fa-duotone fa-circle-dollar-to-slot" style="margin-right:1rem;  font-size: 30px;  width: 40px;"></i>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="stat-content" style="margin-right:50px; margin-top:5px; margin-bottom:20px;">
+                                        <div class="text-left dib">
+                                            <div class="stat-text" style="font-size:20px; font-weight:700;"><span class="count">@Model.TotalIncomeAmount</span></div>
+                                            <div class="stat-heading" style="font-size:18px; font-weight:400;">Gəlirlər</div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <br /><br /><br />
+
+            </div>
+
+        </li>
+    </ul>
+
+</div>
+<div class="row table1" style="display:none">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-center">
+                    <h2 class="card-title">Son 30 Gündə Akademiyaya Qatılan Tələbələr</h2>
+                </div>
+                <div class="table-responsive " style="overflow:hidden">
+                    <table class="table table-hover" style="text-align:center">
+                        <thead>
+                            <tr style="text-align:center;">
+                                <th>Ad</th>
+                                <th>Soyad</th>
+                                <th>Qrup</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Students)
+                            {
+                                <tr style="text-align:center;">
+
+                                    <td>@item.Name</td>
+                                    <td>@item.Surname</td>
+                                    <td>@item.Course.Name (@item.Category.Name) @item.Group.GroupNumber</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row table2" style="display:none">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-center">
+                    <h2 class="card-title">Son 30 Gündə Akademiyadakı Xərclər</h2>
+                </div>
+                <div class="table-responsive " style="overflow:hidden">
+                    <table class="table table-hover" style="text-align:center">
+                        <thead>
+                            <tr style="text-align:center;">
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Expenditures)
+                            {
+                                <tr>
+                                    <td>@item.AppUser?.Name</td>
+                                    <td>@item.ExpenditureTime.ToString("yyyy-MM-dd")</td>
+                                    <td>@item.Money</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row table3" style="display:none">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-center">
+                    <h2 class="card-title">Son 30 Gündə Akademiyadakı Gəlirlər</h2>
+                </div>
+                <div class="table-responsive " style="overflow:hidden">
+                    <table class="table table-hover" style="text-align:center">
+                        <thead>
+                            <tr style="text-align:center;">
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Incomes)
+                            {
+                                <tr>
+                                    <td>@item.AppUser?.Name</td>
+                                    <td>@item.IncomeTime.ToString("yyyy-MM-dd")</td>
+                                    <td>@item.Money</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function show1() {
+        const table = document.querySelector(".table1");
+        if (table.style.display == "none") {
+            table.style.display = "block";
+        } else if (table.style.display == "block") {
+            table.style.display = "none";
+        }
+    }
+    function show2() {
+        const table = document.querySelector(".table2");
+        if (table.style.display == "none") {
+            table.style.display = "block";
+        } else if (table.style.display == "block") {
+            table.style.display = "none";
+        }
+    }
+    function show3() {
+        const table = document.querySelector(".table3");
+        if (table.style.display == "none") {
+            table.style.display = "block";
+        } else if (table.style.display == "block") {
+            table.style.display = "none";
+        }
+    }
+
+</script>
+
+
+
+

@@ -1,0 +1,12 @@
+﻿@model List<Category>
+<div class="form-group">
+    <label>Select Category</label>
+    <select class="form-control" name="categoryId" id="category">
+        @foreach (Category category in Model)
+        {
+            <option value="@category.Id">@category.Name</option>
+
+        }
+    </select>
+    <span class="text-danger"></span>
+</div>

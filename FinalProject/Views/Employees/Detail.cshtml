@@ -1,0 +1,115 @@
+﻿@using System.Globalization;
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+    *{
+        font-family:Andika;
+    }
+</style>
+@model Employee
+@{
+    CultureInfo culture = new CultureInfo("az-Latn-AZ");
+    CultureInfo.CurrentCulture = culture;
+    var today = DateTime.Today;
+    var age = today.Year - Model.EmployeeDetail.DateOfBirth.Year;
+}
+<h5 class="card-title" style="text-align:center; font-size:30px; font-weight:400; margin-bottom:20px;">İşçi Haqqında Məlumat</h5>
+
+<div class="card mb-3" style="max-width: 1400px; margin:auto; height:800px;">
+    <div class="row g-0">
+        <div style="background-color:#C5CAE9; width:700px; height:800px; border-top-left-radius:20px; border-bottom-left-radius:20px;">
+            <img src="~/images/@Model.Image" class="img-fluid rounded-start" alt="@Model.Name-nin şəkili" style="border-radius:10px; min-height:635px; min-width:100%; margin:80px;">
+        </div>
+        <div class="col-md-6" style="display:flex;">
+            <div class="card-body">
+                <div>
+                    <h1 style="margin-top:70px; text-align:center; font-size:55px; ">@Model.Name @Model.Surname</h1>
+
+                    <div class="col-lg-6" style="margin-left:50px; display:flex;">
+                        <ul style="list-style-type:none; margin-top:20px; font-size:18px;">
+                            <li>
+                                <strong>Şəxsi məlumatları</strong><hr>
+                            </li> 
+                            <li>
+                                <i class="bi bi-chevron-right"></i>
+                                <strong>Atasının Adı:</strong>
+                                <span>@Model.FatherName</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-chevron-right"></i>
+                                <strong>Ad Günü:</strong>
+                                <span>@Model.EmployeeDetail.DateOfBirth.ToString("dd MMMM yyyy", culture)</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-chevron-right"></i>
+                                <strong>Yaşı:</strong>
+                                <span>@age</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-chevron-right"></i>
+                                <strong>Cinsiyyəti:</strong>
+                                <span>
+                                    @if (Model.EmployeeDetail.Gender)
+                                    {
+                                        <span>Qadın</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Kişi</span>
+                                    }
+                                </span>
+                            </li>
+                            <li>
+                                <br>
+                                <strong>Əlaqə məlumatları</strong><hr>
+                            </li>
+                            <li>
+                                <i class="bi bi-chevron-right"></i>
+                                <strong>Əlaqə Nömrəsi:</strong>
+                                <span>@Model.EmployeeDetail.Phone</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-chevron-right"></i>
+                                <strong>Ünvanı:</strong>
+                                <span>@Model.EmployeeDetail.Address</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-chevron-right"></i>
+                                <strong>E-mail ünvanı:</strong>
+                                <span>@Model.EmployeeDetail.Email</span>
+                            </li>
+                            <li>
+                                <br>
+                                <strong>İş məlumatları</strong><hr>
+                            </li>
+                            <li>
+                                <i class="bi bi-chevron-right"></i>
+                                <strong>Vəzifə:</strong>
+                                <span>@Model.Position.Name</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-chevron-right"></i>
+                                <strong>Kurs:</strong>
+                                <span>@Model.Course.Name , @Model.Category.Name</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-chevron-right"></i>
+                                <strong>Maaş:</strong>
+                                <span>@Model.EmployeeDetail.Salary</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-chevron-right"></i>
+                                <strong>İş Təcrübə Müddəti:</strong>
+                                <span>@Model.EmployeeDetail.ExperienceYear</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+             </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,32 @@
+﻿@model MailMessage
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">İşçiyə Mail Göndər</h4>
+
+                <form class="forms-sample" method="post" enctype="multipart/form-data">
+                    
+                    <div class="form-group">
+                        <label asp-for="@Model.MessageSubject">Başlıq</label>
+                        <input asp-for="@Model.MessageSubject" class="form-control">
+                        <span asp-validation-for="@Model.MessageSubject"  class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.MessageBody">Mesaj</label>
+                        <input asp-for="@Model.MessageBody" class="form-control">
+                        <span asp-validation-for="@Model.MessageBody" class="text-danger">  </span>
+                    </div>
+                   
+                    <button type="submit" class="btn btn-primary mr-2">Göndər</button>
+                    <a asp-action="Index" class="btn btn-light">Ləğv Et</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    
+    <partial name="_ValidationScriptsPartial" />
+}

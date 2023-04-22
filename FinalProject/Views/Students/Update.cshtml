@@ -1,0 +1,153 @@
+﻿@model Student
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tələbə Məlumatlarında Dəyişiklik Et</h4>
+
+                <form class="forms-sample" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="@Model.Name">Ad</label>
+                        <input asp-for="@Model.Name" class="form-control">
+                        <span asp-validation-for="@Model.Name" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Surname">Soyad</label>
+                        <input asp-for="@Model.Surname" class="form-control">
+                        <span asp-validation-for="@Model.Surname" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.StudentDetail.FatherName">Atasının Adı</label>
+                        <input asp-for="@Model.StudentDetail.FatherName" class="form-control">
+                        <span asp-validation-for="@Model.StudentDetail.FatherName" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.StudentDetail.Address">Ünvanı</label>
+                        <input asp-for="@Model.StudentDetail.Address" class="form-control">
+                        <span asp-validation-for="@Model.StudentDetail.Address" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label>Cinsiyyət</label> <br><hr>
+                        @Html.RadioButtonFor(model => model.StudentDetail.Gender, true)
+                        <label>Qadın</label>
+                        @Html.RadioButtonFor(model => model.StudentDetail.Gender, false)
+                        <label>Kişi</label>
+                    </div>
+                    <div class="form-group">
+                        <label>Kurs Seç</label>
+                        <select asp-for="@Model.CourseId" class="form-control" name="courseId" id="course">
+                            @foreach (Course course in ViewBag.Courses)
+                            {
+                                if (!course.IsDeactive)
+                                {
+                                    if (course.Id == Model.CourseId)
+                                    {
+                                        <option selected value="@course.Id">@course.Name</option>
+
+                                    }
+                                    else
+                                    {
+                                        <option value="@course.Id">@course.Name</option>
+
+                                    }
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="@Model.CourseId" class="text-danger"></span>
+                    </div>
+                    <div id="catGroup">
+                        <div class="form-group">
+                            <label>Kursun Kateqoriyasını Seç</label>
+                            <select @*asp-for="@Model.CategoryId"*@ class="form-control" name="categoryId" id="category">
+                                @foreach (Category category in Model.Course.Categories)
+                                {
+                                    if (category.Id == Model.CategoryId)
+                                    {
+                                        <option selected value="@category.Id">@category.Name</option>
+
+                                    }
+                                    else
+                                    {
+                                        <option value="@category.Id">@category.Name</option>
+
+                                    }
+                                }
+                            </select>
+                            <span @*asp-validation-for="@Model.CategoryId"*@ class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Qrupunu Seç</label>
+                            <select asp-for="@Model.GroupId" class="form-control" id="group">
+                                @foreach (Group group in Model.Course.Categories.FirstOrDefault(x => x.Id == Model.CategoryId).Groups)
+                                {
+                                        if (group.Id == Model.GroupId)
+                                        {
+                                            <option selected value="@group.Id">@group.GroupNumber</option>
+
+                                        }
+                                        else
+                                        {
+                                            <option value="@group.Id">@group.GroupNumber</option>
+
+                                        }
+                                }
+                            </select>
+                            <span asp-validation-for="@Model.GroupId" class="text-danger"></span>
+                        </div>
+                   </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.StudentDetail.PhoneNumber">Əlaqə Nömrəsi</label>
+                        <input asp-for="@Model.StudentDetail.PhoneNumber" class="form-control">
+                        <span asp-validation-for="@Model.StudentDetail.PhoneNumber" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.StudentDetail.Email">E-mail Ünvanı</label>
+                        <input asp-for="@Model.StudentDetail.Email" class="form-control">
+                        <span asp-validation-for="@Model.StudentDetail.Email" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.StudentDetail.DateOfBirth">Doğum Tarixi</label>
+                        <input asp-for="@Model.StudentDetail.DateOfBirth" class="form-control">
+                        <span asp-validation-for="@Model.StudentDetail.DateOfBirth" class="text-danger">  </span>
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Yadda Saxla</button>
+                    <a asp-action="Index" class="btn btn-light">Ləğv Et</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+    {
+    <script>
+        $(document).on("change", "#course", function () {
+            $.ajax({
+                url: "/Students/LoadCategories/",
+                type: "get",
+                data: {
+                    "courseId": $("#course").val()
+                },
+                success: function (response) {
+                    $("#catGroup").empty()
+                    $("#catGroup").append(response)
+                }
+            })
+
+        });
+        $(document).on("change", "#category", function () {
+            $.ajax({
+                url: "/Students/LoadGroups/",
+                type: "get",
+                data: {
+                    "categoryId": $("#category").val()
+                },
+                success: function (response) {
+                    $("#group").empty()
+                    $("#group").append(response)
+                }
+            })
+
+        });
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+}

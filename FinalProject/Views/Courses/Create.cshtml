@@ -1,0 +1,43 @@
+﻿@model Course
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Kurs Əlavə Et</h4>
+                <form class="forms-sample" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="@Model.Photo">Şəkil</label>
+                        <input accept="image/*" asp-for="@Model.Photo" class="form-control">
+                        <span asp-validation-for="@Model.Photo" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Name">Ad</label>
+                        <input asp-for="@Model.Name" class="form-control">
+                        <span asp-validation-for="@Model.Name" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.CourseDetail.Description">Haqqında</label>
+                        <input asp-for="@Model.CourseDetail.Description" class="form-control">
+                        <span asp-validation-for="@Model.CourseDetail.Description" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.CourseDetail.Amount">Ödəniş Məbləği</label>
+                        <input asp-for="@Model.CourseDetail.Amount" class="form-control">
+                        <span asp-validation-for="@Model.CourseDetail.Amount" class="text-danger">  </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.CourseDetail.CourseDuration">Kurs Müddəti</label>
+                        <input asp-for="@Model.CourseDetail.CourseDuration" class="form-control">
+                        <span asp-validation-for="@Model.CourseDetail.CourseDuration" class="text-danger">  </span>
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Yadda Saxla</button>
+                    <a asp-action="Index" class="btn btn-light">Ləğv Et</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}
